@@ -1,33 +1,24 @@
 #include <stdio.h>
-int main() {   
-    int CLA; //clave del trabajador
-    int CAT; //categoría del empleado
-    int ANT; //antigu¨edad del trabajador
-    int RES = 0; //condiciones
+#include <string.h>
 
-    printf("Clave del trabajador: ");  
-    scanf("%d",&CLA);
-
-    printf("Categoria del empleado: ");  
-    scanf("%d",&CAT);
-
-    printf("Antiguedad del trabajador: ");  
-    scanf("%d",&ANT);
-
-    if ((CAT > 2) && (CAT < 5) && (ANT > 5))
-    {
-        // Cumple las condiciones
-        RES = 1;
-    }else if((CAT == 2) && (ANT > 7)){
-        // Cumple las condiciones
-        RES = 1;
-    }
+int main(){
+    char cad[50];
+    char car;
+    int i;
+    int contador=0;
     
-    if(RES == 1){
-        printf("El empleado clave %d cumple las condiciones", CLA);
-    }else{
-        printf("El empleado clave %d no Cumple las condiciones", CLA);
-    }
     
+    printf("Inserte cadena de caracteres:\n");
+    scanf("%s", &cad);
+    
+    printf("Inserte caracter a contar:\n");
+    scanf("%s", &car);
+    
+    for(i=0;i<50;i++){
+        if(cad[i]==car){
+            contador++;
+        }
+    }
+    printf("La cantidad de letras %c presentes en el arreglo ingresado es de: %d\n",car,contador);
     return 0;
 }

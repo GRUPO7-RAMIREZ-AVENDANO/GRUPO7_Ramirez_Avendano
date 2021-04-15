@@ -1,64 +1,36 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
- 
-/* funcion para obtener numeros random */ 
-int * getRandom() { 
-  static int r[255];
-  int i;
- 
-  srand( (unsigned)time( NULL ) ); 
-    for ( i = 0; i < 256; ++i) { 
-    r[i] = rand() % (255 + 1 - 0) + 0 ; //se limita al intervalo 0-255
-    printf( "r[%d] = %d\n", i, r[i]);
-  }
- 
-  return r; 
-}
-/* funcion para transformar a binario */  
-int * bin(unsigned n){
-    static int b[8];
-    int limit = 128; //debido a que el intervalo esta limitado a 255, 128 es el bit mayor
-    int c = 0;
-    for ( c = 0; c < 8; ++c){ 
-        if ((n > 1) && (n >= limit)){
-            n = (n - limit);
-            b[c] = 1;
-        }else if((n == 1) && (c == 7)){
-            b[c] = 1;
-        }else{
-            b[c] = 0;
-        }
-        limit = (limit / 2);
-        printf( "%d", b[c]);
-    }
-    printf("\n");
-    for ( c = 0; c < 8; ++c){ 
-        printf( "%d ", b[c]);
-    }
-    printf("\n");
-    return b;
-}
+#include <string.h>
 
-int main (){
-    int x;
-    int *ran = getRandom();
+int main () {
+   FILE * fp;
+   char data[100000];
 
-    for ( x = 0; x < 256; x++){
-        int *p;
-        int i;
-        printf( "----------------------\n");
-        printf( "Decimal ingresado: %d\n", *(ran + x));
-        p = bin(*(ran + x));
-        int c = 0;
-        for ( i = 7; i >= 0; i-- ){
-            if(*(p + i) == 1){
-                printf( "Led %d: ON\n", c); 
-            }else{
-                printf( "Led %d: OFF\n", c);
-            }
-            c++;
-        }
-    }
-    return 0;
-} 
+   fp = fopen ("data2.txt", "r");
+   fscanf( fp, " %[^\n]",&data);
+   printf("Informacion Ingresada:\n%s\n",data);
+   fclose(fp);
+ 
+   int i;
+   
+   for(i=0;i<100;i++){
+       if(data[i]=='7'){
+           if(data[i+1]=='E'){
+               if(data[i+2]=='B'){
+                   if(data[i+3]=='3'){
+                        printf("\nRouter 1:\n");
+                        printf("Temperatura Ambiente: %c%c\n",data[i+19],data[i+20]);
+                    }else{
+                        printf("\nRouter 2:\n");
+                        printf("Humedad: %c%c%c\n",data[i+19],data[i+20],data[i+21]);
+                    }
+                   printf("Trama: ");
+               }
+           }
+           
+       }
+       printf("%c",data[i]);
+   }
+
+   return(0);
+}
