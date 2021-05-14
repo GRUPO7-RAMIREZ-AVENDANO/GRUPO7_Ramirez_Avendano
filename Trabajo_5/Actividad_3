@@ -1,0 +1,10 @@
+a='b'
+print(a)
+b=a+'b'
+print(b)
+c=a+'a'
+print(c)
+d=a*2+'b'*3
+print(d)
+e=2*(a+'b')
+print(e)
